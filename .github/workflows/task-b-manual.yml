@@ -43,6 +43,6 @@ jobs:
         with:
           context: ./task_b
           push: true
-          tags: ghcr.io/hello007/github-cicd-course:${{ inputs.tag }}
+          tags: ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
   # TODO: Add test job
