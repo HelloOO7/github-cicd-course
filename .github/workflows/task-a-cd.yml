@@ -18,4 +18,9 @@ jobs:
             pip install -r ./task_a/requirements.txt
         - name: Run pytest
           run: |
-            pytest ./task_a/task_a.py
+            pytest ./task_a/task_a.py --html =./task_a/report.html
+        - name: Upload pytest report
+          uses: actions/upload-artifact@v7
+          with:
+            name: pytest-report
+            path: ./task_a/report.html
