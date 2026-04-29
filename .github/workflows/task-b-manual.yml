@@ -46,10 +46,12 @@ jobs:
           tags: ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
       - name: Test Docker image
+        needs: docker
+        services:
+          app:
+            image: ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
+            ports:
+              - 8080:80
         run: |
-          docker run -d -p 8080:80 --name task-b ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
           sleep 5
           curl -f http://localhost:8080/index.html
-          docker logs task-b
-          docker stop task-b
-      
