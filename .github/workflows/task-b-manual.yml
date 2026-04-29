@@ -43,6 +43,6 @@ jobs:
         with:
           context: ./task_b
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ inputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
   # TODO: Add test job
