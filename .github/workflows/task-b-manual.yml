@@ -45,4 +45,11 @@ jobs:
           push: true
           tags: ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
           labels: ${{ steps.meta.outputs.labels }}
-  # TODO: Add test job
+      - name: Test Docker image
+        run: |
+          docker run -d -p 8080:80 --name task-b ghcr.io/hellooo7/github-cicd-course:${{ inputs.tag }}
+          sleep 5
+          curl -f http://localhost:8080/index.html
+          docker logs task-b
+          docker stop task-b
+      
