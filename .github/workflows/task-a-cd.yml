@@ -24,3 +24,4 @@ jobs:
           with:
             name: pytest-report
             path: ./task_a/report.html
+            archive: false
