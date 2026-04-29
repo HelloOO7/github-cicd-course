@@ -7,7 +7,10 @@ on:
         description: 'Message'
         required: true
         default: 'Hello CI/CD'
-      # TODO: add tag input
+      tag:
+        description: 'Image tag'
+        required: true
+        default: 'latest'
 permissions:
   contents: read
   packages: write
@@ -33,7 +36,13 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ghcr.io/${{ github.repository }}
+          images: ghcr.io/${{ github.repository }}:${{ inputs.tag }}
           tags: type=ref,event=tag
-      # TODO: build and push docker image
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v7
+        with:
+          context: ./task_b
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
   # TODO: Add test job
